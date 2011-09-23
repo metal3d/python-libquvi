@@ -1,21 +1,18 @@
 """Quvi is a media url parser from several hosts (youtube, dailymotion,
 vimeo...)
 See http://quvi.sourceforge.net/
+
+You can use the class to parse an url from youtube, dailymotion... like this:
+>> import quvi
+>> q = quvi.Quvi()
+>> q.parse("http://....")
+>> print q.getproperties()
+
 """
 __author__="Patrice FERLET <metal3d@gmail.com>"
 __license__="LGPLv2.1+."
-__doc__="""
-You can use the class to parse an url from youtube, dailymotion... like this:
-import quvi
 
-q = quvi.Quvi()
-q.parse("http://....")
-
-print q.getproperties
-
-"""
 cimport cquvi
-
 
 cdef class Quvi:
     """Main class that parse media url
