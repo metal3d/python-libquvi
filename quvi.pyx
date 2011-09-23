@@ -11,8 +11,6 @@ You can use the class to parse an url from youtube, dailymotion... like this:
 """
 __author__="Patrice FERLET <metal3d@gmail.com>"
 __license__="LGPLv2.1+."
-__version__ = "$Revision: 00f8e3bb1197 $"
-# $Source$
 
 cimport cquvi
 
