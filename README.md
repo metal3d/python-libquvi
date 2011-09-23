@@ -7,7 +7,7 @@ This is a first attempt to wrap libquvi into python.
 This is based on Cython. The main functions are defined into cpython.pxd file and Quvi class is developped into quvi.pyx file.
 Compilation is made with Cython using the simple command:
 
-  python setup.py build_ext
+    python setup.py build_ext
 
 You can also compile .so file in you current directory
 
