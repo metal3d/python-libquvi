@@ -47,7 +47,7 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
 
 
     import quvi
-    from multiprocessing import Process, Queue
+    from multiprocessing import Process
 
     #this function will be called in thread
     def getInfo(url):
