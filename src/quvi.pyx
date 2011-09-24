@@ -3,7 +3,8 @@ vimeo...)
 See http://quvi.sourceforge.net/
 
 You can use this module to parse an url from youtube, dailymotion... like this:
->> import quvi as q
+>> import quvi
+>> q = Quvi()
 >> q.parse("http://....")
 >> print q.getproperties()
 
