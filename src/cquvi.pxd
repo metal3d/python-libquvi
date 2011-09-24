@@ -1,5 +1,10 @@
+"""
+This is the pxd file used to define needed functions/types from
+libquvi
+"""
 __author__="Patrice FERLET <metal3d@gmail.com>"
 __license__="LGPLv2.1+."
+
 cdef extern from "quvi/quvi.h":
     
     ctypedef struct quvi_t:
