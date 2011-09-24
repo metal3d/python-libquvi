@@ -13,6 +13,23 @@ You can also compile .so file in you current directory
 
 	python setup.py build_ext --inplace
 
+To install library on system, you may use as root or by sudo:
+
+    python setup.py install
+
+Remember you can use ``virtual_env`` to try quvi without impact on your system:
+
+    mkdir /tmp/py-virt
+    virtual_env /tmp/py-virt
+    source /tmp/py-virt/bin/activate
+    setup python.py install
+
+This will install quvi into a virtual environnement. To deactivate virtual environnment:
+
+    deactivate
+
+in a terminal.
+
 ## Why ?
 
 Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo... movies information into my python project. Calling "quvi" command line may be use, but to have a real library implementation is the better way to have good performances. 

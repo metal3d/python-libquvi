@@ -1,10 +1,9 @@
-"""Quvi is a media url parser from several hosts (youtube, dailymotion,
+"""Quvi is a media url parser supporting several hosts (youtube, dailymotion,
 vimeo...)
 See http://quvi.sourceforge.net/
 
-You can use the class to parse an url from youtube, dailymotion... like this:
->> import quvi
->> q = quvi.Quvi()
+You can use this module to parse an url from youtube, dailymotion... like this:
+>> import quvi as q
 >> q.parse("http://....")
 >> print q.getproperties()
 
@@ -30,7 +29,7 @@ def parse(url):
         raise "Exception occured, next media error"
 
 def getproperties():
-    """Return a dict with title and media url"""
+    """Return a dict with media properties"""
     res = {}
     cdef char* resc
     cdef int   resi
