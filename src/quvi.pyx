@@ -14,9 +14,6 @@ __license__="LGPLv2.1+."
 
 cimport cquvi
 
-#cdef class Quvi:
-"""Main class that parse media url
-"""
 #those handles ctypes from quvi.h
 cdef cquvi.quvi_t _c_quvi
 cdef cquvi.quvi_media_t _c_m
@@ -34,17 +31,75 @@ def parse(url):
 
 def getproperties():
     """Return a dict with title and media url"""
-    cdef char* media_title
-    cdef char* media_url
-    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_PAGETITLE, &media_title)
-    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIAURL, &media_url)
-    t= media_title
-    u= media_url
-    return {
-        'url': u,
-        'title': t
-        }
+    res = {}
+    cdef char* resc
+    cdef int   resi
+    cdef long resl
+    cdef double resd
+
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_HOSTID, &resc)
+    res['hostid'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_PAGEURL, &resc)
+    res['pageurl'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_PAGETITLE, &resc)
+    res['pagetitle'] = resc
     
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIAID, &resc)
+    res['mediaid'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIAURL, &resc)
+    res['mediaurl'] = resc
+    
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIACONTENTLENGTH, &resl)
+    res['mediacontentlength'] = resl;
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIACONTENTTYPE, &resc) 
+    res['mediacontenttype'] = resc;
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_FILESUFFIX, &resc) 
+    res['filesuffix'] = resc;
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_RESPONSECODE, &resl) 
+    res['responsecode'] = resl
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_FORMAT, &resc) 
+    res['format'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_STARTTIME, &resc) 
+    res['starttime'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIATHUMBNAILURL, &resc) 
+    res['mediathumbnail'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_MEDIADURATION, &resd) 
+    res['mediaduration'] = resd
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_VIDEOID, &resc) 
+    res['videoid'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_VIDEOURL, &resc) 
+    res['videurl'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_VIDEOFILELENGTH, &resd) 
+    res['videofilelength'] = resd
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_VIDEOFILECONTENTTYPE, &resc) 
+    res['videfilecontenttype'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_VIDEOFILESUFFIX, &resc) 
+    res['videofilesuffix'] = resc
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_HTTPCODE, &resl) 
+    res['httpcode'] = resl
+
+    cquvi.quvi_getprop(_c_m, cquvi.QUVIPROP_VIDEOFORMAT, &resc) 
+    res['videoformat'] = resc
+
+    return res
+
 def next():
     """Jumps to next media"""
     rc = cquvi.quvi_next_media_url(&_c_m)
