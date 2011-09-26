@@ -142,8 +142,7 @@ cdef class Quvi:
             return False
 
         if rc != cquvi.QUVI_OK:
-            raise QuviError("Error occured while fetching next media url with"
-                " code %s" % str(rc))
+            raise QuviError("Error occured while fetching next media url with code %d" % rc)
 
         return True
 
