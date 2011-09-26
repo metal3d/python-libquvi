@@ -74,7 +74,7 @@ Both url will be handle in a thread. So this will be about twice quicker than pa
 
 ## Why this python lib ?
 
-Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo... Movies information into my python project. Calling "quvi" command line may be used, but to have a real library implementation is the better way to have good performances. 
+Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo (etc...) movies information into my python project. Calling "quvi" command line may be used, but having a real library implementation is the better way to have good performances. 
 
 Using Cython is pretty cool
 
