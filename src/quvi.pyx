@@ -23,16 +23,44 @@ cdef class Quvi:
         """Initialize quvi handle"""
         cquvi.quvi_init(&self._c_quvi)
 
-    def parse(self, url):
-        """Parse given url parameters"""
-        cdef char* _url = url
-        rc = cquvi.quvi_parse(self._c_quvi, _url, &self._c_m);
+    cdef void _c_parse(self, char* url):
+        """Parses given url parameters"""
+        rc = cquvi.quvi_parse(self._c_quvi, url, &self._c_m);
         if rc != cquvi.QUVI_OK:
-            raise QuviError("Exception occured, next media error with code %s" %
-                str(rc))
+            raise QuviError("Exception occured, next media error with code %d" % rc)
+
+    def parse(self, char *url):
+        """Parses given url parameters
+
+        :param url: media webpage url (in form http://...)
+        """
+        self._c_parse(url)
 
     def getproperties(self):
-        """Return a dict with media properties"""
+        """Returns a dict with media properties
+
+        returned properties are:
+            - hostid
+            - pageurl
+            - pagetitle
+            - mediaid
+            - mediaurl
+            - mediacontentlength
+            - mediacontenttype
+            - filesuffix
+            - responsecode
+            - format
+            - starttime
+            - mediathumbnail
+            - mediaduration
+            - videoid
+            - videourl
+            - videofilelength
+            - videofilesuffix
+            - videoformat
+            - httpcode
+
+        """
         res = {}
         cdef char* resc
         cdef int   resi
@@ -83,7 +111,7 @@ cdef class Quvi:
         res['videoid'] = resc
 
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOURL, &resc) 
-        res['videurl'] = resc
+        res['videourl'] = resc
 
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOFILELENGTH, &resd) 
         res['videofilelength'] = resd
@@ -103,7 +131,11 @@ cdef class Quvi:
         return res
 
     def nextmediaurl(self):
-        """Jumps to next media"""
+        """Jumps to next media
+
+        :returns Boolean True if other media is found, False either
+        Raise an exception on error"""
+
         rc = cquvi.quvi_next_media_url(self._c_m)
 
         if rc == cquvi.QUVI_LAST:
@@ -128,4 +160,4 @@ class QuviError(Exception):
         self.value = value
 
     def __str__(self):
-        print repr(self.value)
+        return repr(self.value)
