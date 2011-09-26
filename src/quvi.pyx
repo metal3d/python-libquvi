@@ -28,7 +28,8 @@ cdef class Quvi:
         cdef char* _url = url
         rc = cquvi.quvi_parse(self._c_quvi, _url, &self._c_m);
         if rc != cquvi.QUVI_OK:
-            raise "Exception occured, next media error"
+            raise QuviError("Exception occured, next media error with code %s" %
+                str(rc))
 
     def getproperties(self):
         """Return a dict with media properties"""
@@ -103,12 +104,16 @@ cdef class Quvi:
 
     def nextmediaurl(self):
         """Jumps to next media"""
-        rc = cquvi.quvi_next_media_url(&self._c_m)
-        if rc != cquvi.QUVI_OK:
+        rc = cquvi.quvi_next_media_url(self._c_m)
+
+        if rc == cquvi.QUVI_LAST:
             return False
 
+        if rc != cquvi.QUVI_OK:
+            raise QuviError("Error occured while fetching next media url with"
+                " code %s" % str(rc))
+
         return True
-        
 
     def __del__(self):
         """Cleanup media handles"""
@@ -116,3 +121,11 @@ cdef class Quvi:
         cquvi.quvi_close(&self._c_quvi)
         cquvi.quvi_free(&self._c_quvi)
 
+
+class QuviError(Exception):
+    """Exception to rais on QuviErrors"""
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        print repr(self.value)

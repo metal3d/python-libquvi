@@ -16,34 +16,52 @@ cdef extern from "quvi/quvi.h":
     ctypedef void* quvi_callback_status
     ctypedef enum QUVIcode:
         QUVI_OK  = 0x00
+        QUVI_MEM              
+        QUVI_BADHANDLE       
+        QUVI_INVARG    
+        QUVI_CURLINIT        
+        QUVI_LAST             
+        QUVI_ABORTEDBYCALLBACK
+        QUVI_LUAINIT          
+        QUVI_NOLUAWEBSITE, 
+        QUVI_NOLUAUTIL        
+        _INTERNAL_QUVI_LAST   
+
+        QUVI_PCRE = 0x40 
+        QUVI_NOSUPPORT   
+        QUVI_CALLBACK
+        QUVI_ICONV      
+        QUVI_LUA         
+
+        QUVI_CURL = 0x42
 
     ctypedef enum QUVIversion:
         pass
     ctypedef enum QUVIidentProperty:
         pass
     ctypedef enum QUVIproperty:
-        QUVIPROP_NONE = 0x00
-        QUVIPROP_HOSTID = 0x100000 + 1
-        QUVIPROP_PAGEURL = 0x100000 + 2
-        QUVIPROP_PAGETITLE = 0x100000 + 3
-        QUVIPROP_MEDIAID = 0x100000 + 4
-        QUVIPROP_MEDIAURL = 0x100000 + 5
-        QUVIPROP_MEDIACONTENTLENGTH = 0x300000 + 6
-        QUVIPROP_MEDIACONTENTTYPE = 0x100000 + 7
-        QUVIPROP_FILESUFFIX = 0x100000 + 8
-        QUVIPROP_RESPONSECODE = 0x200000   + 9
-        QUVIPROP_FORMAT = 0x100000 + 10
-        QUVIPROP_STARTTIME = 0x100000 + 11
-        QUVIPROP_MEDIATHUMBNAILURL = 0x100000 + 12
-        QUVIPROP_MEDIADURATION = 0x300000 + 13
-        QUVIPROP_VIDEOID = 0x100000 + 4
-        QUVIPROP_VIDEOURL = 0x100000 + 5
-        QUVIPROP_VIDEOFILELENGTH = 0x300000 + 6
-        QUVIPROP_VIDEOFILECONTENTTYPE = 0x100000 + 7
-        QUVIPROP_VIDEOFILESUFFIX = 0x100000 + 8
-        QUVIPROP_HTTPCODE = 0x200000   + 9
-        QUVIPROP_VIDEOFORMAT = 0x100000 + 10
-        _QUVIPROP_LAST = 13
+        QUVIPROP_NONE 
+        QUVIPROP_HOSTID 
+        QUVIPROP_PAGEURL 
+        QUVIPROP_PAGETITLE 
+        QUVIPROP_MEDIAID 
+        QUVIPROP_MEDIAURL 
+        QUVIPROP_MEDIACONTENTLENGTH 
+        QUVIPROP_MEDIACONTENTTYPE 
+        QUVIPROP_FILESUFFIX 
+        QUVIPROP_RESPONSECODE 
+        QUVIPROP_FORMAT 
+        QUVIPROP_STARTTIME 
+        QUVIPROP_MEDIATHUMBNAILURL 
+        QUVIPROP_MEDIADURATION 
+        QUVIPROP_VIDEOID 
+        QUVIPROP_VIDEOURL 
+        QUVIPROP_VIDEOFILELENGTH 
+        QUVIPROP_VIDEOFILECONTENTTYPE 
+        QUVIPROP_VIDEOFILESUFFIX 
+        QUVIPROP_HTTPCODE 
+        QUVIPROP_VIDEOFORMAT 
+        _QUVIPROP_LAST 
 
     ctypedef enum QUVIoption:
         pass
