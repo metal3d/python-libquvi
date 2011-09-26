@@ -80,7 +80,7 @@ Using Cython is pretty cool
 
 ## What's next ?
 
-For now, You can only get title and media url. I will continue to develop this library to handle other properties that are already bundled into C library (author, date, time,...) 
+For now, you can only get media information from a page you ask to parse. I will continue to develop this library to improved and use properties provided by C library (version, nextmediaurl...)
 
 If you want to develop with me, fork the project on GitHub, then process some merge request :)
 
