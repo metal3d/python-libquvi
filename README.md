@@ -4,7 +4,7 @@ This is a first attempt to wrap libquvi into python.
 
 ## How it is made ?
 
-This is based on Cython. The main functions are defined into cpython.pxd file and Quvi class is developped into quvi.pyx file.
+This is based on Cython. The main functions are defined into cpython.pxd file and Quvi class is developed into quvi.pyx file.
 Compilation is made with Cython using the simple command:
 
     python setup.py build_ext
@@ -24,11 +24,10 @@ Remember you can use ``virtual_env`` to try quvi without impact on your system:
     source /tmp/py-virt/bin/activate
     setup python.py install
 
-This will install quvi into a virtual environnement. To deactivate virtual environnment:
+This will install quvi into a virtual environment. To deactivate virtual environment, in the same terminal session:
 
     deactivate
 
-in a terminal.
 
 ## Usage
 
@@ -75,7 +74,7 @@ Both url will be handle in a thread. So this will be about twice quicker than pa
 
 ## Why this python lib ?
 
-Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo... movies information into my python project. Calling "quvi" command line may be use, but to have a real library implementation is the better way to have good performances. 
+Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo... Movies information into my python project. Calling "quvi" command line may be used, but to have a real library implementation is the better way to have good performances. 
 
 Using Cython is pretty cool
 
