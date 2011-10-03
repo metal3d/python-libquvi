@@ -75,11 +75,11 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
 
 Both url will be handle in a thread. So this will be about twice quicker than parsing each url one by one.
 
-----------------------
-Why this python lib ?
-----------------------
+-------------------------
+Why this python library ?
+-------------------------
 
-Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo (etc...) movies information into my python project. Calling "quvi" command line may be used, but having a real library implementation is the better way to have good performances. 
+Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo (etc...) movies information into my python project. Calling "quvi" command line may be used, but having a real library implementation is the best way to have good performances. 
 
 Using Cython is pretty cool
 
