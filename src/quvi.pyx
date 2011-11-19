@@ -107,25 +107,25 @@ cdef class Quvi:
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIADURATION, &resd) 
         res['mediaduration'] = resd
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOID, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAID, &resc) 
         res['videoid'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOURL, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAURL, &resc) 
         res['videourl'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOFILELENGTH, &resd) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILELENGTH, &resd) 
         res['videofilelength'] = resd
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOFILECONTENTTYPE, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILECONTENTTYPE, &resc) 
         res['videfilecontenttype'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOFILESUFFIX, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILESUFFIX, &resc) 
         res['videofilesuffix'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_HTTPCODE, &resl) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_RESPONSECODE, &resl) 
         res['httpcode'] = resl
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_VIDEOFORMAT, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FORMAT, &resc) 
         res['videoformat'] = resc
 
         return res
