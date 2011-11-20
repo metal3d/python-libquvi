@@ -113,11 +113,11 @@ cdef class Quvi:
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAURL, &resc) 
         res['videourl'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILELENGTH, &resd) 
-        res['videofilelength'] = resd
+        #cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILELENGTH, &resd) 
+        #res['videofilelength'] = resd
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILECONTENTTYPE, &resc) 
-        res['videfilecontenttype'] = resc
+        #cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILECONTENTTYPE, &resc) 
+        #res['videfilecontenttype'] = resc
 
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILESUFFIX, &resc) 
         res['videofilesuffix'] = resc
