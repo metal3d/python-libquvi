@@ -23,7 +23,7 @@ cdef class Quvi:
         """Initialize quvi handle"""
         cquvi.quvi_init(&self._c_quvi)
 
-    cdef int _c_parse(self, char* url):
+    cdef cquvi.QUVIcode _c_parse(self, char* url):
         """Parses given url parameters"""
         rc = cquvi.quvi_parse(self._c_quvi, url, &self._c_m);
         return rc
