@@ -54,14 +54,6 @@ cdef extern from "quvi/quvi.h":
         QUVIPROP_STARTTIME 
         QUVIPROP_MEDIATHUMBNAILURL 
         QUVIPROP_MEDIADURATION 
-        #deprecated
-        #QUVIPROP_VIDEOID 
-        #QUVIPROP_VIDEOURL 
-        #QUVIPROP_VIDEOFILELENGTH 
-        #QUVIPROP_VIDEOFILECONTENTTYPE 
-        #QUVIPROP_VIDEOFILESUFFIX 
-        #QUVIPROP_HTTPCODE 
-        #QUVIPROP_VIDEOFORMAT 
         _QUVIPROP_LAST 
 
     ctypedef enum QUVIoption:
