@@ -23,18 +23,19 @@ cdef class Quvi:
         """Initialize quvi handle"""
         cquvi.quvi_init(&self._c_quvi)
 
-    cdef void _c_parse(self, char* url):
+    cdef cquvi.QUVIcode _c_parse(self, char* url):
         """Parses given url parameters"""
         rc = cquvi.quvi_parse(self._c_quvi, url, &self._c_m);
-        if rc != cquvi.QUVI_OK:
-            raise QuviError("Exception occured, next media error with code %d" % rc)
+        return rc
 
     def parse(self, char *url):
         """Parses given url parameters
 
         :param url: media webpage url (in form http://...)
         """
-        self._c_parse(url)
+        rc = self._c_parse(url)
+        if rc != cquvi.QUVI_OK:
+            raise QuviError("Exception occured, next media error with code %d" % rc)
 
     def getproperties(self):
         """Returns a dict with media properties
@@ -53,12 +54,6 @@ cdef class Quvi:
             - starttime
             - mediathumbnail
             - mediaduration
-            - videoid
-            - videourl
-            - videofilelength
-            - videofilesuffix
-            - videoformat
-            - httpcode
 
         """
         res = {}
@@ -106,27 +101,6 @@ cdef class Quvi:
 
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIADURATION, &resd) 
         res['mediaduration'] = resd
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAID, &resc) 
-        res['videoid'] = resc
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAURL, &resc) 
-        res['videourl'] = resc
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILELENGTH, &resd) 
-        res['videofilelength'] = resd
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILECONTENTTYPE, &resc) 
-        res['videfilecontenttype'] = resc
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILESUFFIX, &resc) 
-        res['videofilesuffix'] = resc
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_RESPONSECODE, &resl) 
-        res['httpcode'] = resl
-
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FORMAT, &resc) 
-        res['videoformat'] = resc
 
         return res
 

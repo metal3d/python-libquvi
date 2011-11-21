@@ -1,0 +1,3 @@
+build
+src/quvi.c
+test/quvi.so
