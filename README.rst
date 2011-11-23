@@ -21,10 +21,10 @@ To install library on system, you may use as root or by sudo::
 
     python setup.py install
 
-Remember you can use ``virtual_env`` to try quvi without impact on your system::
+Remember you can use ``virtualenv`` to try quvi without impact on your system::
 
     mkdir /tmp/py-virt
-    virtual_env /tmp/py-virt
+    virtualenv /tmp/py-virt
     source /tmp/py-virt/bin/activate
     setup python.py install
 
