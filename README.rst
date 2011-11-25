@@ -38,10 +38,10 @@ Usage
 
 After having compiled quvi, you can use it as a python module. Module defines a class named ``Quvi``. This is a simple usage::
 
-    import Quvi
+    import quvi
 
     #instance:
-    q = Quvi()
+    q = quvi.Quvi()
     q.parse("http://a.youtube.url")
     print q.getproperties()
 
@@ -54,7 +54,7 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
 
     #this function will be called in thread
     def getInfo(url):
-        q=quvi.Quvi()
+        q = quvi.Quvi()
         q.parse(url)
         print q.getproperties()
     
