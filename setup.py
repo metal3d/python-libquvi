@@ -11,7 +11,7 @@ setup(
   url="https://github.com/metal3d/python-libquvi",
   description="libquvi wrapper module",
   license="LGPLv2.1+",
-  version="0.0.1-a2",
+  version="0.0.1-a3",
   cmdclass = {'build_ext': build_ext},
   ext_modules = ext_modules,
   long_description = "".join(open('README.rst').readlines()),
