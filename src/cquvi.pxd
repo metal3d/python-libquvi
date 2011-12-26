@@ -6,60 +6,73 @@ __author__="Patrice FERLET <metal3d@gmail.com>"
 __license__="LGPLv2.1+."
 
 cdef extern from "quvi/quvi.h":
-    
+
     ctypedef struct quvi_t:
         pass
-    
+
     ctypedef void* quvi_media_t
     ctypedef void* quvi_video_t
     ctypedef void* quvi_ident_t
     ctypedef void* quvi_callback_status
     ctypedef enum QUVIcode:
         QUVI_OK  = 0x00
-        QUVI_MEM              
-        QUVI_BADHANDLE       
-        QUVI_INVARG    
-        QUVI_CURLINIT        
-        QUVI_LAST             
+        QUVI_MEM
+        QUVI_BADHANDLE
+        QUVI_INVARG
+        QUVI_CURLINIT
+        QUVI_LAST
         QUVI_ABORTEDBYCALLBACK
-        QUVI_LUAINIT          
-        QUVI_NOLUAWEBSITE, 
-        QUVI_NOLUAUTIL        
-        _INTERNAL_QUVI_LAST   
+        QUVI_LUAINIT
+        QUVI_NOLUAWEBSITE,
+        QUVI_NOLUAUTIL
+        _INTERNAL_QUVI_LAST
 
-        QUVI_PCRE = 0x40 
-        QUVI_NOSUPPORT   
+        QUVI_PCRE = 0x40
+        QUVI_NOSUPPORT
         QUVI_CALLBACK
-        QUVI_ICONV      
-        QUVI_LUA         
+        QUVI_ICONV
+        QUVI_LUA
 
         QUVI_CURL = 0x42
 
     ctypedef enum QUVIversion:
-        pass
+        QUVI_VERSION
+        QUVI_VERSION_LONG
+        QUVI_VERSION_SCRIPTS
+
     ctypedef enum QUVIidentProperty:
         pass
     ctypedef enum QUVIproperty:
-        QUVIPROP_NONE 
-        QUVIPROP_HOSTID 
-        QUVIPROP_PAGEURL 
-        QUVIPROP_PAGETITLE 
-        QUVIPROP_MEDIAID 
-        QUVIPROP_MEDIAURL 
-        QUVIPROP_MEDIACONTENTLENGTH 
-        QUVIPROP_MEDIACONTENTTYPE 
-        QUVIPROP_FILESUFFIX 
-        QUVIPROP_RESPONSECODE 
-        QUVIPROP_FORMAT 
-        QUVIPROP_STARTTIME 
-        QUVIPROP_MEDIATHUMBNAILURL 
-        QUVIPROP_MEDIADURATION 
-        _QUVIPROP_LAST 
+        QUVIPROP_NONE
+        QUVIPROP_HOSTID
+        QUVIPROP_PAGEURL
+        QUVIPROP_PAGETITLE
+        QUVIPROP_MEDIAID
+        QUVIPROP_MEDIAURL
+        QUVIPROP_MEDIACONTENTLENGTH
+        QUVIPROP_MEDIACONTENTTYPE
+        QUVIPROP_FILESUFFIX
+        QUVIPROP_RESPONSECODE
+        QUVIPROP_FORMAT
+        QUVIPROP_STARTTIME
+        QUVIPROP_MEDIATHUMBNAILURL
+        QUVIPROP_MEDIADURATION
+        _QUVIPROP_LAST
 
     ctypedef enum QUVIoption:
-        pass
+        QUVIOPT_FORMAT
+        QUVIOPT_NOVERIFY
+        QUVIOPT_STATUSFUNCTION
+        QUVIOPT_NORESOLVE
+        QUVIOPT_CATEGORY
+        QUVIOPT_FETCHFUNCTION
+        QUVIOPT_RESOLVEFUNCTION
+        QUVIOPT_VERIFYFUNCTION
+
     ctypedef enum QUVIinfo:
-        pass
+        QUVIINFO_CURL
+        QUVIINFO_RESPONSECODE
+
     ctypedef int quvi_word
     ctypedef int quvi_byte
 

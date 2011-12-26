@@ -18,6 +18,7 @@ cdef class Quvi:
     #those handles ctypes from quvi.h
     cdef cquvi.quvi_t _c_quvi
     cdef cquvi.quvi_media_t _c_m
+    cdef char *_c_formats
 
     def __cinit__ (self):
         """Initialize quvi handle"""
@@ -25,8 +26,40 @@ cdef class Quvi:
 
     cdef cquvi.QUVIcode _c_parse(self, char* url):
         """Parses given url parameters"""
-        rc = cquvi.quvi_parse(self._c_quvi, url, &self._c_m);
+        rc = cquvi.quvi_parse(self._c_quvi, url, &self._c_m)
         return rc
+
+    cdef cquvi.QUVIcode _c_query_formats(self, char* url):
+        """Get the available formats for the URL"""
+        rc = cquvi.quvi_query_formats(self._c_quvi, url, &self._c_formats)
+        return rc
+
+    cdef cquvi.QUVIcode _c_setopt(self, cquvi.QUVIoption option_id, void* parameter):
+        """Set an option"""
+        rc = cquvi.quvi_setopt(self._c_quvi, option_id, parameter)
+        return rc
+
+    def query_formats(self, char* url):
+        """Query the server to get all the formats availables.
+
+        :param url: media webpage url (in form http://...)
+        """
+        rc = self._c_query_formats(url)
+        if rc != cquvi.QUVI_OK:
+            raise QuviError("Exception occured, next media error with code %d" % rc)
+
+    def get_formats(self):
+        """Return an array with the available formats"""
+        return self._c_formats.split("|")
+
+    def set_format(self, char* c_format):
+        """Set a format
+
+        :param c_format: format to use (ex.: fmt45_720p)
+        """
+        rc = self._c_setopt(cquvi.QUVIOPT_FORMAT, c_format)
+        if rc != cquvi.QUVI_OK:
+            raise QuviError("Exception occured, next media error with code %d" % rc)
 
     def parse(self, char *url):
         """Parses given url parameters
@@ -71,35 +104,35 @@ cdef class Quvi:
 
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_PAGETITLE, &resc)
         res['pagetitle'] = resc
-        
+
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAID, &resc)
         res['mediaid'] = resc
 
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIAURL, &resc)
         res['mediaurl'] = resc
-        
+
         cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIACONTENTLENGTH, &resl)
         res['mediacontentlength'] = resl;
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIACONTENTTYPE, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIACONTENTTYPE, &resc)
         res['mediacontenttype'] = resc;
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILESUFFIX, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FILESUFFIX, &resc)
         res['filesuffix'] = resc;
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_RESPONSECODE, &resl) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_RESPONSECODE, &resl)
         res['responsecode'] = resl
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FORMAT, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_FORMAT, &resc)
         res['format'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_STARTTIME, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_STARTTIME, &resc)
         res['starttime'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIATHUMBNAILURL, &resc) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIATHUMBNAILURL, &resc)
         res['mediathumbnail'] = resc
 
-        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIADURATION, &resd) 
+        cquvi.quvi_getprop(self._c_m, cquvi.QUVIPROP_MEDIADURATION, &resd)
         res['mediaduration'] = resd
 
         return res
