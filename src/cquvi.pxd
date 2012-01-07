@@ -14,6 +14,10 @@ cdef extern from "quvi/quvi.h":
     ctypedef void* quvi_video_t
     ctypedef void* quvi_ident_t
     ctypedef void* quvi_callback_status
+    ctypedef enum QUVIversion:
+        QUVI_VERSION
+        QUVI_VERSION_LONG
+        QUVI_VERSION_SCRIPTS
     ctypedef enum QUVIcode:
         QUVI_OK  = 0x00
         QUVI_MEM
@@ -23,25 +27,48 @@ cdef extern from "quvi/quvi.h":
         QUVI_LAST
         QUVI_ABORTEDBYCALLBACK
         QUVI_LUAINIT
-        QUVI_NOLUAWEBSITE,
+        QUVI_NOLUAWEBSITE
         QUVI_NOLUAUTIL
         _INTERNAL_QUVI_LAST
 
-        QUVI_PCRE = 0x40
         QUVI_NOSUPPORT
         QUVI_CALLBACK
         QUVI_ICONV
         QUVI_LUA
 
-        QUVI_CURL = 0x42
+    ctypedef enum QUVIstatus:
+        QUVISTATUS_FETCH
+        QUVISTATUS_VERIFY
+        QUVISTATUS_RESOLVE
 
-    ctypedef enum QUVIversion:
-        QUVI_VERSION
-        QUVI_VERSION_LONG
-        QUVI_VERSION_SCRIPTS
+    ctypedef enum QUVIstatusType:
+        QUVISTATUSTYPE_PAGE
+        QUVISTATUSTYPE_CONFIG
+        QUVISTATUSTYPE_PLAYLIST
+        QUVISTATUSTYPE_DONE
 
-    ctypedef enum QUVIidentProperty:
-        pass
+    ctypedef enum QUVIoption:
+        QUVIOPT_FORMAT
+        QUVIOPT_NOVERIFY
+        QUVIOPT_STATUSFUNCTION
+        QUVIOPT_NORESOLVE
+        QUVIOPT_CATEGORY
+        QUVIOPT_FETCHFUNCTION
+        QUVIOPT_RESOLVEFUNCTION
+        QUVIOPT_VERIFYFUNCTION
+
+    ctypedef enum QUVIcategory:
+        QUVIPROTO_HTTP
+        QUVIPROTO_MMS
+        QUVIPROTO_RTSP
+        QUVIPROTO_RTMP
+        QUVIPROTO_ALL
+
+    ctypedef enum QUVIinfo:
+        QUVIINFO_NONE
+        QUVIINFO_CURL
+        QUVIINFO_RESPONSECODE
+
     ctypedef enum QUVIproperty:
         QUVIPROP_NONE
         QUVIPROP_HOSTID
@@ -59,19 +86,11 @@ cdef extern from "quvi/quvi.h":
         QUVIPROP_MEDIADURATION
         _QUVIPROP_LAST
 
-    ctypedef enum QUVIoption:
-        QUVIOPT_FORMAT
-        QUVIOPT_NOVERIFY
-        QUVIOPT_STATUSFUNCTION
-        QUVIOPT_NORESOLVE
-        QUVIOPT_CATEGORY
-        QUVIOPT_FETCHFUNCTION
-        QUVIOPT_RESOLVEFUNCTION
-        QUVIOPT_VERIFYFUNCTION
-
-    ctypedef enum QUVIinfo:
-        QUVIINFO_CURL
-        QUVIINFO_RESPONSECODE
+    ctypedef enum QUVIidentProperty:
+        QUVI_IDENT_PROPERTY_URL
+        QUVI_IDENT_PROPERTY_DOMAIN
+        QUVI_IDENT_PROPERTY_FORMATS
+        QUVI_IDENT_PROPERTY_CATEGORIES
 
     ctypedef int quvi_word
     ctypedef int quvi_byte
