@@ -16,8 +16,8 @@ cdef extern from "quvi/quvi.h":
     ctypedef void* quvi_callback_status
     ctypedef enum QUVIversion:
         QUVI_VERSION
-        QUVI_VERSION_LONG
-        QUVI_VERSION_SCRIPTS
+        #QUVI_VERSION_LONG
+        #QUVI_VERSION_SCRIPTS
     ctypedef enum QUVIcode:
         QUVI_OK  = 0x00
         QUVI_MEM
@@ -90,7 +90,7 @@ cdef extern from "quvi/quvi.h":
         QUVI_IDENT_PROPERTY_URL
         QUVI_IDENT_PROPERTY_DOMAIN
         QUVI_IDENT_PROPERTY_FORMATS
-        QUVI_IDENT_PROPERTY_CATEGORIES
+        #QUVI_IDENT_PROPERTY_CATEGORIES
 
     ctypedef int quvi_word
     ctypedef int quvi_byte
