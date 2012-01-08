@@ -86,7 +86,6 @@ cdef class Quvi:
 
     def is_supported(self, char* url):
         rc = cquvi.quvi_supported(self._c_quvi, url)
-        rc = self._c_supported(url)
         if rc == cquvi.QUVI_OK:
             return True
         elif rc == cquvi.QUVI_NOSUPPORT:
