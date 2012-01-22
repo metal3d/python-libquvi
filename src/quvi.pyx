@@ -36,9 +36,11 @@ cdef class Quvi:
         return rc
 
     def get_error_message(self, code):
+        """Get the error string from the library"""
         return cquvi.quvi_strerror(self._c_quvi, code)
 
     def get_version(self):
+        """Get the version(s), only QUVI_VERSION is known by the C library"""
         #print cquvi.quvi_version(cquvi.QUVI_VERSION)
         #print cquvi.quvi_version(cquvi.QUVI_VERSIONLONG)
         #print cquvi.quvi_version(cquvi.QUVI_SCRIPTS)
@@ -48,6 +50,7 @@ cdef class Quvi:
         return version
 
     def get_supported_ident_properties(self, char* url):
+        """Get a few properties for an URL, does not needs connectivity."""
         cdef char* resc = NULL
         cdef cquvi.quvi_ident_t _c_ident = NULL
         rc = cquvi.quvi_supported_ident(self._c_quvi, url, &_c_ident)
@@ -85,6 +88,8 @@ cdef class Quvi:
 
 
     def is_supported(self, char* url):
+        """Is the URL supported ? True/False/Unknown"""
+
         rc = cquvi.quvi_supported(self._c_quvi, url)
         if rc == cquvi.QUVI_OK:
             return True
@@ -97,6 +102,7 @@ cdef class Quvi:
             raise error
 
     def _get_info(self, info):
+        """Get a particular info after trying to fetch properties"""
         cdef long _c_session_info = -1
         rc = cquvi.quvi_getinfo(self._c_quvi, info, &_c_session_info)
         if rc != cquvi.QUVI_OK:
@@ -108,9 +114,11 @@ cdef class Quvi:
             return _c_session_info
 
     def get_curl_session_handle(self):
+        """Get the latest curl session handle"""
         return self._get_info(cquvi.QUVIINFO_CURL)
 
     def get_response_code(self):
+        """Get the latest HTTP response code"""
         return self._get_info(cquvi.QUVIINFO_RESPONSECODE)
 
     def get_formats(self, char* url):
@@ -246,6 +254,7 @@ cdef class Quvi:
         cquvi.quvi_free(&self._c_quvi)
 
 def get_properties_best_quality(url):
+    """Get the properties of the best available format of a video"""
     q = Quvi()
     if q.is_supported(url):
         formats = q.get_formats(url)
@@ -262,9 +271,11 @@ class QuviError(Exception):
         self.error_msg = ""
 
     def custom_error(self, msg):
+        """Set a custom error message"""
         self.error_msg = "An error occurred: " + msg
 
     def return_code_error(self, function_name, value, msg):
+        """Set an error message defined by the C library"""
         self.error_msg = "An error occurred in function \"{fct}\": {detail} ({code})"\
                 .format(fct = function_name, detail = msg, code = value)
 
