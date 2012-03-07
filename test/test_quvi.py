@@ -19,6 +19,6 @@ def testValidURL():
     q.parse("http://www.youtube.com/watch?v=0gzA6Xzbh1k")
 
     expected = "youtube"
-    actual = q.getproperties()["hostid"]
+    actual = q.get_properties()["hostid"]
 
     assert actual == expected
