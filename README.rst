@@ -57,7 +57,7 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
         q = quvi.Quvi()
         q.parse(url)
         print q.getproperties()
-    
+
     #urls to parse
     url = "http://www.youtube.com/watch?v=..."
     url2 = "http://www.youtube.com/watch?v=..."
@@ -66,7 +66,7 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
     processes = []
     processes.append( Process(target=getInfo, args=(url,)) )
     processes.append( Process(target=getInfo, args=(url2,)) )
-    
+
     #start and join threads
     [p.start() for p in processes]
     [p.join() for p in processes]
@@ -75,11 +75,38 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
 
 Both url will be handle in a thread. So this will be about twice quicker than parsing each url one by one.
 
+Another usecase would be to get the properties of the best format available::
+
+    from quvi import Quvi
+
+    def get_properties_best_quality(url):
+        q = Quvi()
+
+        url = "http://www.youtube.com/watch?v=0gzA6Xzbh1k"
+        if q.is_supported(url):
+            formats = q.get_formats(url)
+            best_format = formats[-1]
+            q.set_format(best_format)
+            q.parse(url)
+            properties = q.get_properties()
+            return properties
+        return none
+
+And downloading the video::
+
+    def get_video(filename, url):
+        properties = get_properties_best_quality(url)
+        if properties is not None:
+            to_dl = properties["mediaurl"]
+            filename += properties["filesuffix"]
+            urlretrieve(to_dl, filename)
+
+
 -------------------------
 Why this python library ?
 -------------------------
 
-Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo (etc...) movies information into my python project. Calling "quvi" command line may be used, but having a real library implementation is the best way to have good performances. 
+Because Quvi command line is really nice and I wanted to get youtube, dailymotion, vimeo (etc...) movies information into my python project. Calling "quvi" command line may be used, but having a real library implementation is the best way to have good performances.
 
 Using Cython is pretty cool
 
