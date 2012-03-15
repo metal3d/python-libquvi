@@ -9,7 +9,7 @@ You can use this module to parse an url from youtube, dailymotion... like this:
 >> print q.get_properties()
 
 """
-__author__="Patrice FERLET <metal3d@gmail.com>"
+__author__="Patrice FERLET <metal3d@gmail.com>", "Raphaël VINOT <raphael.vinot@gmail.com>"
 __license__="LGPLv2.1+."
 
 cimport cquvi
