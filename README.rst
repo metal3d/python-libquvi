@@ -43,7 +43,7 @@ After having compiled quvi, you can use it as a python module. Module defines a 
     #instance:
     q = quvi.Quvi()
     q.parse("http://a.youtube.url")
-    print q.getproperties()
+    print q.get_properties()
 
 You will see a dict definition that have severals information given by libquvi.
 
@@ -56,7 +56,7 @@ It's possible to use ``multiprocessing`` module or ``threads`` module to handle 
     def getInfo(url):
         q = quvi.Quvi()
         q.parse(url)
-        print q.getproperties()
+        print q.get_properties()
 
     #urls to parse
     url = "http://www.youtube.com/watch?v=..."

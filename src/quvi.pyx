@@ -9,7 +9,7 @@ You can use this module to parse an url from youtube, dailymotion... like this:
 >> print q.get_properties()
 
 """
-__author__="Patrice FERLET <metal3d@gmail.com>"
+__author__="Patrice FERLET <metal3d@gmail.com>", "Raphaël VINOT <raphael.vinot@gmail.com>"
 __license__="LGPLv2.1+."
 
 cimport cquvi
@@ -41,12 +41,7 @@ cdef class Quvi:
 
     def get_version(self):
         """Get the version(s), only QUVI_VERSION is known by the C library"""
-        #print cquvi.quvi_version(cquvi.QUVI_VERSION)
-        #print cquvi.quvi_version(cquvi.QUVI_VERSIONLONG)
-        #print cquvi.quvi_version(cquvi.QUVI_SCRIPTS)
         version = cquvi.quvi_version(cquvi.QUVI_VERSION)
-        #version_long = cquvi.quvi_version(cquvi.QUVI_VERSIONLONG)
-        #scripts = cquvi.quvi_version(cquvi.QUVI_SCRIPTS)
         return version
 
     def get_supported_ident_properties(self, char* url):
